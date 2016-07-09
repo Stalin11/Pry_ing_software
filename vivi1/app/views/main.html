@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="ISO-8859-1">
+<title>#{get 'title' /}</title>
+        <meta charset="${_response_encoding}">
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/reset.css'}">
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/estilo.css'}">
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/ie.css'}">
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/grid_12.css'}">
+		<link rel="stylesheet" media="screen" href="@{'/public/stylesheets/bootstrap.min.css'}">
+        
+        #{get 'moreStyles' /}
+ 
+ 
+         #{get 'moreScripts' /}
+               
+        <script src="@{'/public/javascripts/jquery.easing.1.3.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+        <script src="@{'/public/javascripts/tms-0.4.x.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+    	<script src="@{'/public/javascripts/jquery-1.11.3.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+        <script src="@{'/public/javascripts/html5.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+    	<script src="@{'/public/javascripts/uCarousel.js'}" type="text/javascript" charset="${_response_encoding}"></script>
+    	<script src="@{'/public/bootstrap/js/bootstrap.js'}" type="text/javascript"></script>
+ 
+ 
+ 
+    
+    <script>
+		   	$(function(){
+				$('.slider')._TMS({
+					show:0,
+					pauseOnHover:true,
+					prevBu:false,
+					nextBu:false,
+					playBu:false,
+					duration:1000,
+					preset:'fade',
+					pagination:true,
+					pagNums:false,
+					slideshow:7000,
+					numStatus:true,
+					banners:'fromRight',
+					waitBannerAnimation:false,
+					progressBar:false
+				});
+		   	});
+	
+	</script>
+	<!--[if lt IE 8]>
+       <div style=' clear: both; text-align:center; position: relative;'>
+         <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+           <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg"
+            border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, 
+            safer browsing experience, upgrade for free today." />
+        </a>
+      </div>
+    <![endif]-->
+    <!--[if lt IE 9]>
+   		<script type="text/javascript" src="js/html5.js"></script>
+    	<link rel="stylesheet" type="text/css" media="screen" href="css/ie.css">
+	<![endif]-->
+   
+  
+
+</head>
+<body>
+<nav class="navbar navbar-inverse navbar-static-top" role="navigation" >
+     	<div class="social-icons">        
+     		#{if conectado}
+				<span class="pull-left"> &nbsp; &nbsp; &nbsp; Bienvenido, Administrador -  ${conectado.nombre} ${conectado.apellido}.</span>
+			#{/if}            
+			<span>Siguenos en:</span> <img src="@{'public/images/icon1.png'}" alt="" />
+			<img src="@{'public/images/icon2.png'}" alt="" />			
+		</div>
+</nav>
+	<div class="container" style="padding-top: 1em;" >
+	
+	<button type="button" class="btn btn-default navbar-btn  ">
+			<img width="120" height="70" src="@{'/public/images/TvVivo.jpg'}"/>
+		</button>
+	<button type="button"   class="btn btn-default navbar-btn navbar-left">
+			<img width="120" height="70" src="@{'/public/images/tvmicc1.png'}"/>
+		</button>
+	<button type="button" style="float: right;" class="btn btn-default navbar-btn navbar-center">
+				ESCUCHANOS <br> 
+				<img width="120" height="70" src="@{'/public/images/play.png'}"/>
+		</button>
+		
+<br> <br>
+<div class=" well navbar navbar-" role="navigation"  >
+
+	<ul class="nav navbar-nav nav nav-pills" >
+	
+	
+	 <a href="/" class="active" 
+                			
+                			title="Administrar Curso" >
+                    <i ></i>
+                    <span > 
+                    </span>
+      </a>
+     
+	
+	<li class="active" title="Ingrese al inicio"><a href="/">INICIO</a>
+	<li class="active" title="Historia, Mision y Vision"><a href="@{quienesSomos.historia()}">QUINES-SOMOS</a>
+	<li class="active" title="Programas las 24 horas"><a href="@{calendarios.horarioProgramacion()}">PROGRAMACI&Oacute;N</a>
+	
+	<li class="active" title="Para ubicarnos"><a href="@{contactos.index()}">CONTACTOS</a>
+	
+	#{if !conectado}
+		<li class="active" title="Para ubicarnos"><a href="/secure/login">INGRESAR</a>
+	#{/if}
+	#{else}
+		<li class="active" title="Para ubicarnos"><a href="/admin">ADMINISTRACION</a>
+		<li class="active" title="Para ubicarnos"><a href="/secure/logout">SALIR</a>
+	#{/else}
+	</ul>
+		
+	<form class="navbar-form navbar-right" role="search">
+      <div class="form-group" class="btn-group">
+        <input type="text" class="form-control" placeholder="Buscar">
+        <button type="submit" class="btn btn-default">Enviar</button>
+      </div>
+    </form>
+	</div>
+</div>
+    
+<!--PIE DE PAGINA  -->
+
+   	
+        #{doLayout /}
+</body>
+<nav class="navbar-collapse navbar-inverse text-center"  >
+
+			<p style="color: white">
+				Tv MICC. 47 en Cotopaxi | Latacunga | Salcedo | Todos
+				los cantones
+			</p>
+			<br /> 
+			<p style="color: white">
+				Ll&aacute;manos: 523- 2800-268<br /> Escr&iacute;benos:
+				canaltvmicc@gmail.com
+			</p>
+			<p style="color: white">
+				Direcci&oacute;n: Calle Quito 58-18 y Luis F. Ru&iacute;z<br />
+				Latacunga - Ecuador
+			</p>
+
+		<p style="color: white">	
+		&copy; CanalDelMovimientoCotopaxi. 	Derechos reservados 2016.
+			</p>
+</nav>
+</html>

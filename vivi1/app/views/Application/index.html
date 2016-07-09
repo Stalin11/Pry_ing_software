@@ -1,0 +1,55 @@
+#{extends 'main.html'/}
+#{ set title:'home'/}
+<title>TV MICC 47</title>
+<meta charset="utf-8">
+   
+        <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/slider.css'}">
+         <link rel="stylesheet" media="screen" href="@{'/public/stylesheets/divVertical.css'}">
+      
+        <script src="public/javascripts/tms-0.4.x.js"></script>
+
+<div class="container ">
+	
+	<div  id="vertical" >
+		<ul>
+  			<li><a href="@{calendarios.calendar()}"><img width="60" height="50" src="public/images/horario.png" alt="" />&nbsp;&nbsp;Calendario</a></li>
+  			<li><a href="@{Comentarios.noticia()}"><img width="60" height="50" src="public/images/descarga.png" alt="" />&nbsp;&nbsp;Noticias</a></li>
+  			<li><a href="@{programas.video()}"><img width="60" height="50" src="public/images/evento.png" alt="" />&nbsp;&nbsp;Videos</a></li>
+  			<li><a href="@{galerias.fotos()}"><img width="60" height="50" src="public/images/entretenimiento.png" alt="" />&nbsp;&nbsp;Galeria</a></li>
+			<li><a href="@{Application.notasInteres()}"><img width="60" height="50" src="public/images/noticia.png" alt="" />&nbsp;&nbsp;Notas de Inter&eacute;s</a></li>
+		</ul>
+	</div>
+	
+		 <div id="slide" class="box-shadow">		
+      	<div class="slider">
+                <ul class="items">
+                     <li><img src=public/images/1.jpg alt="" /><div class="banner">La Imagen de la Diversidad&nbsp;</div></li>
+                    <li><img src="@{'/public/images/2.jpg'}" alt="" /><div class="banner">Talento local&nbsp;</div></li>
+                    <li><img src="@{'/public/images/3.jpg'}" alt="" /><div class="banner">Noticias y Success&nbsp;</div></li>
+                    <li><img src="@{'/public/images/4.jpg'}" alt="" /><div class="banner">Nuestra programaci&oacute;n&nbsp;</div></li>
+                    <li><img src="@{'/public/images/5.jpg'}"alt="" /><div class="banner">&nbsp;</div></li>
+                </ul>
+            </div>	
+        </div>
+</div>
+<br>
+<br>
+
+<div class="container">
+            <div class="row">
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                    <center> <h3>DOCUMENTALES</h3></center>
+                    <img src="public/images/documentales.jpeg" alt="" class="img-border">
+                  </div>
+        
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                   <center> <h3>DEPORTES</h3></center>
+                    <img src="public/images/deporte.jpg" alt="" class="img-border">
+                </div>
+                <div class="col-xs-12 col-sm-6 col-md-4">
+                      <center> <h3>ENTRETENIMIENTO</h3></center>
+                    <img src="public/images/entrete.jpg" alt="" class="img-border">
+                </div>
+        </div>
+   </div>
+        

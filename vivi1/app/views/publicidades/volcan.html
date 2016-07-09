@@ -1,0 +1,166 @@
+#{extends 'main.html'/}
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>TV MICC 47</title>
+<link rel="stylesheet" type="text/css" media="screen" 	href="public/stylesheets/estilo.css">
+<link rel="stylesheet" type="text/css" media="screen" 	href="public/stylesheets/slider.css">
+<link rel="stylesheet" type="text/css" media="screen" 	href="public/stylesheets/divVertical.css">
+<link rel="stylesheet" type="text/css" media="screen" 	href="public/stylesheets/reset.css">
+<link rel="stylesheet" type="text/css" media="screen" 	href="public/stylesheets/grid_12.css">
+
+
+<link rel="stylesheet" type="text/css" media="screen" 	href="public/bootstrap/css/bootstrap-responsive.css">
+<link rel="stylesheet" type="text/css" media="screen" 	href="public/bootstrap/css/bootstrap-responsive.min.css">
+<link rel="stylesheet" type="text/css" media="screen" 	href="public/bootstrap/css/bootstrap.css">
+<link rel="stylesheet" type="text/css" media="screen" 	href="public/bootstrap/css/bootstrap.min.css">
+
+<script src="public/bootstrap/js/bootstrap.js"></script>
+<script src="public/bootstrap/js/bootstrap.min.js"></script>
+
+<script src="public/javascripts/jquery-1.6.4.min.js"></script>
+<script src="public/javascripts/jquery-1.7.min.js"></script>
+<script src="public/javascripts/jquery.easing.1.3.js"></script>
+<script src="public/javascripts/tms-0.4.x.js"></script>
+
+<script>
+	$(document).ready(function() {
+		$('.slider')._TMS({
+			show : 0,
+			pauseOnHover : true,
+			prevBu : false,
+			nextBu : false,
+			playBu : false,
+			duration : 1000,
+			preset : 'fade',
+			pagination : true,
+			pagNums : false,
+			slideshow : 7000,
+			numStatus : true,
+			banners : 'fromRight',
+			waitBannerAnimation : false,
+			progressBar : false
+		})
+	});
+</script>
+<!--[if lt IE 8]>
+       <div style=' clear: both; text-align:center; position: relative;'>
+         <a href="http://windows.microsoft.com/en-US/internet-explorer/products/ie/home?ocid=ie6_countdown_bannercode">
+           <img src="http://storage.ie6countdown.com/assets/100/images/banners/warning_bar_0000_us.jpg"
+            border="0" height="42" width="820" alt="You are using an outdated browser. For a faster, 
+            safer browsing experience, upgrade for free today." />
+        </a>
+      </div>
+    <![endif]-->
+<!--[if lt IE 9]>
+   		<script type="text/javascript" src="js/html5.js"></script>
+    	<link rel="stylesheet" type="text/css" media="screen" href="css/ie.css">
+	<![endif]-->
+
+</head>
+<body id="body">
+	<div id="header">
+		<div class="social-icons">
+			<span>Siguenos en:</span> <a href="#" class="icon-2"></a> <a href="#"
+				class="icon-1"></a>
+		</div>
+
+	</div>
+
+	<div id="header1">
+		<button style="background-color: #808080">
+			<img alt="" width="120px" height="70px"
+				src="public/images/tvmicc1.png">
+		</button>
+	</div>
+
+	<div id="header2">
+		<button style="background-color: #808080">
+			<b style="font-family: Arial; color: white">ESCUCHARNOS</b> <br>
+			<img alt="" width="100" height="50" src="public/images/play.png">
+		</button>
+	</div>
+	<div id="header3">
+		<button style="background-color: #808080">
+			<b style="font-family: Arial; color: white">PUEDES VERNOS EN: </b> <br>
+			<img alt="" width="100" height="50" src="public/images/TvVivo.jpg">
+		</button>
+	</div>
+	<div id="menu">
+
+		<nav class="box-shadow">
+			<div>
+				<ul class="menu">
+
+					<li><a href="@{Application.index()}">INICIO</a></li>
+					<li><a href="@{quienesSomos.historia()}">QUIENES-SOMOS</a></li>
+					<li><a href="projects.html">PROGRAMAS</a></li>
+					<li><a href="@{programas.noticia()}">NOTICIAS</a></li>
+					<li><a href="@{programas.video()}">VIDEOS</a></li>
+
+					 <li><a href="@{galerias.fotos()}">GALERIA</a></li>
+                    <li><a href="@{contactos.direccion()}">CONTACTOS</a></li>
+				</ul>
+				<div class="form-search">
+					<form id="form-search" method="post">
+						<input type="text" value="Buscar..."
+							onBlur="if(this.value=='') this.value='Type here...'"
+							onFocus="if(this.value =='Type here...' ) this.value=''" /> <a
+							href="#"
+							onClick="document.getElementById('form-search').submit()"
+							class="search_button"></a>
+					</form>
+				</div>
+				<div class="clear"></div>
+			</div>
+			
+			
+		</nav>
+		
+	</div>
+	<div id="slide">
+	<img alt="" width="100" height="50" src="public/images/noti.png">
+			<p>
+			Esta noche tenemos como invitada especial en VOCES E IDENTIDAD a la Economista Tamara Armas Coordinadora Zonal 3 del Ministerio de Turismo, abordaremos la afectación que ha tenido en los últimos meses la reactivación del volcán Cotopaxi en el sector turístico del Cantón Latacunga y acciones que impulsa la coordinación zonal para ayudar a los prestadores de servicios turísticos de la provincia .
+20h00 bajo la conducción de Luis Aimacaña y Lucia Perez
+06/10/2015
+			</p>
+			</div>
+			
+			
+			
+		
+		
+		
+		 <div id="vertical">
+ 		<ul>
+  			<li><a href="@{programas.horarioProgramacion()}"><img width="60" height="50" src="public/images/horario.png" alt="" />&nbsp;&nbsp;Horario de programaci&oacute;n</a></li>
+  			<li><a ><img width="60" height="50" src="public/images/descarga.png" alt="" />&nbsp;&nbsp;Descargas</a></li>
+  			<li><a ><img width="60" height="50" src="public/images/evento.png" alt="" />&nbsp;&nbsp;Eventos</a></li>
+  			<li><a ><img width="60" height="50" src="public/images/entretenimiento.png" alt="" />&nbsp;&nbsp;Entretenimiento</a></li>
+			<li><a ><img width="60" height="50" src="public/images/noticia.png" alt="" />&nbsp;&nbsp;Notas de Inter&eacute;s</a></li>
+		</ul>
+		</div>
+<nav class="navbar-collapse navbar-inverse text-center"  >
+
+			<p style="color: white">
+				Tv MICC. 47 en Cotopaxi | Latacunga | Salcedo | Todos
+				los cantones
+			</p>
+			<br /> 
+			<p style="color: white">
+				Ll&aacute;manos: 523- 2800-268<br /> Escr&iacute;benos:
+				canaltvmicc@gmail.com
+			</p>
+			<p style="color: white">
+				Direcci&oacute;n: Calle Quito 58-18 y Luis F. Ru&iacute;z<br />
+				Latacunga - Ecuador
+			</p>
+
+		<p style="color: white">	
+		&copy; CanalDelMovimientoCotopaxi. 	Derechos reservados 2016.
+			</p>
+</nav> 
+</body>
+</html>

@@ -1,0 +1,109 @@
+#{extends 'main.html' /}
+
+
+	 <!-- Login usuario -->
+		    <div class="row">
+		    	
+		    	<div class="col-lg-4 col-md-3"></div>
+		        <div class=" col-lg-4 col-sm-12 col-md-6 well">
+		            <legend> <b> &nbsp; <i class="glyphicon glyphicon-lock"> </i>  &nbsp; Acceso al Sistema </b></legend>
+		           
+		            <div class="thumbnail">
+		            	<img src="@{'/public/images/tvmicc1.png'}" alt="" height="80px;" width="100px;"/>
+		            </div>
+		            
+		            <div class="account-wall">
+		         
+		                    
+		                #{form @authenticate(),id:'formulario'} 
+		                
+		                	#{if flash.errorPassword}		                
+		                		<div class="alert alert-danger"> 
+		                			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									  <span aria-hidden="true">&times;</span>
+									</button>
+		                			 <b> <i class="fa fa-times-circle"> </i> ${flash.errorPassword} </b>
+		                		</div>
+							#{/if}
+							
+							
+							#{if flash.errorUsername}		                
+		                		<div class="alert alert-danger">
+		                			<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+									  <span aria-hidden="true">&times;</span>
+									</button>		                		
+		                		  <b> <i class="fa fa-times-circle"> </i>  ${flash.errorUsername} </b> 
+		                		 </div>
+							#{/if}
+							
+							
+							
+							#{if flash.success}
+								<div class="alert alert-success">
+										<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+										  <span aria-hidden="true">&times;</span>
+										</button>
+									 <b> <i class="fa fa-check-circle-o"></i> Sesión cerrada exitosamente </b>
+								</div>
+							#{/if}
+							
+	
+							
+		                	<label for="" >Usuario: </label> 
+		                	
+		                	<div class="input-group">
+			                	<span class="input-group-addon"> <i class="glyphicon glyphicon-user"> </i></span>
+				                <input type="text" class="form-control" name="username" id="username" value="${flash.username}"  placeholder="Ingrese el usuario" required autofocus><br />
+				             </div>
+				             
+			           		<label for="" >Contraseña: </label>
+			           		
+			           		<div class="input-group">
+			           			<span class="input-group-addon"> <i class="glyphicon glyphicon-asterisk"> </i></span>
+			                	<input type="password" class="form-control" placeholder=" Ingrese su Contrasena" required name="password" id="password" value="" ><br />
+							</div>
+							<br />	                	
+			                <button class="btn btn-md btn-primary btn-block" type="submit"> <b> <i class="fa fa-unlock-alt"> </i> &nbsp; Entrar al Sistema </b></button>
+		               #{/form}
+		            </div>
+		
+		        </div>
+    		</div>
+	
+	<br />
+	<br />
+	<br />
+	<br />
+	<br />
+	
+	
+	
+	<script>
+	
+		$('#formulario').validate({
+			
+			rules:{
+				username:{
+					required:true
+				},
+				password:{
+					required:true
+				}				
+			},
+			messages:{
+				username:{
+					required:"Por favor ingrese su nombre de usuario"
+				},
+				password:{
+					required:"Por favor ingrese su contraseña"
+				}
+			}
+			
+		});
+	</script>
+	
+	
+	
+	
+	
+	

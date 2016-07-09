@@ -1,0 +1,71 @@
+#{extends 'main.html' /} #{set title:'Inicio' /}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+
+<meta charset="UTF-8">
+<title>Home</title>
+
+</head>
+
+<body>
+
+	<!-- 
+=================================
+	Encabezado
+================================= 
+-->
+	<header> </header>
+
+	<div id="registrodes">
+		<div class="registro1">
+			<h1 class="login-title">Comentario</h1>
+
+			<form action="@{Comentarios.registrar}">
+
+				<METHOD=POST>
+
+					<CENTER>
+						<TABLE border="1"  >
+
+							<TR>
+								<TD>Nombre:</TD>
+								<TD><INPUT class="form-control" TYPE="text" NAME="nombre" SIZE=18 MAXLENGTH=18>
+								
+									
+							<TR>
+							
+								<TD>Apellidos:</TD>
+								<TD><INPUT class="form-control" TYPE="text" NAME="apellido" SIZE=48
+									MAXLENGTH=48></TD><br><br>
+								
+							</TR>
+							
+							<TR>
+								<TD>Comentarios<BR>
+								</TD>
+								<TD><TEXTAREA class="form-control" NAME="comentario" ROWS=5 COLS=48></TEXTAREA></TD>
+								
+							</TR>
+						
+							<td><div align="center">
+								<input class="form-control" type="submit" value="Registrar">
+							</div></td>
+						</TABLE>
+					</CENTER>
+				</FORM>
+					</tr>
+				</table>				
+		</div>
+
+		</form>
+		<div id="saludo"></div>
+
+	</div>
+
+
+
+
+
+</body>
+</html>

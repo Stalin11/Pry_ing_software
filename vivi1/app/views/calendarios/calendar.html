@@ -1,0 +1,441 @@
+#{extends 'main.html'/} #{ set title:'home'/}
+
+
+
+
+	    <link href="@{'/public/stylesheets/kendo.common.min.css'}" rel="stylesheet">
+	    <link href="@{'/public/stylesheets/kendo.rtl.min.css'}" rel="stylesheet">
+	    <link href="@{'/public/stylesheets/kendo.default.min.css'}" rel="stylesheet">	    
+	    <link href="@{'/public/stylesheets/kendo.dataviz.min.css'}" rel="stylesheet">
+	    <link href="@{'/public/stylesheets/kendo.silver.min.css'}" rel="stylesheet">
+	    <script src="@{'public/javascripts/kendo.culture.es-ES.min.js'}"></script>
+	    <script src="@{'public/javascripts/kendo.timezones.min.js'}"></script>
+	    <script src="@{'public/javascripts/mensajesKendo.js'}"></script>
+	    <script src="@{'public/javascripts/jszip.min.js'}"></script>
+	    
+	    
+	    <script src="@{'/public/javascripts/kendo.all.min.js'}"></script>
+   	
+
+	<!-- Some CSS for our example. (Not required for calendar plugin. Used for example.)-->
+
+<style type="text/css" media="screen">
+
+
+.shadow {
+	-moz-box-shadow: 3px 3px 4px #aaaaaa;
+	-webkit-box-shadow: 3px 3px 4px #aaaaaa;
+	box-shadow: 3px 3px 4px #aaaaaa;
+	/* For IE 8 */
+	-ms-filter:
+		"progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135, Color='#aaaaaa')";
+	/* For IE 5.5 - 7 */
+	filter: progid:DXImageTransform.Microsoft.Shadow(Strength=4, Direction=135,
+		Color='#aaaaaa');
+}
+</style>
+
+
+<div class="container">
+			
+			
+			
+			<div id="content">
+				    <ul id="tabs" class="nav nav-tabs shadow" data-tabs="tabs">
+				        <li class="active"><a href="#red" data-toggle="tab">Programacion</a></li>
+				        <li><a href="#orange" data-toggle="tab">Eventos</a></li>
+				    </ul>
+				    <div id="my-tab-content" class="tab-content">
+				        <div class="tab-pane active" id="red">			
+				
+					<div id="example" class="k-content">
+					    <div id="scheduler"> </div>
+					</div>
+					
+					
+					#{if conectado}
+				
+				<script>
+								kendo.culture("es-ES");
+				    $("#scheduler").kendoScheduler({
+				          
+				        date: new Date("2016/02/04"),
+				        startTime: new Date("2016/02/04 07:00 AM"),
+				        height: 600,
+				        views: [
+				            "day",
+				            { type: "workWeek", selected: true },
+				            "month",
+				            "agenda",
+				            "week",
+				            "timeline"
+				        ],
+
+				        messages: {
+				      	  cancel: "Cancelar",
+				      	  date: "Fecha",
+				      	  deleteWindowTitle: "Eliminar Programa",
+				      	  destroy: "Eliminar",
+				      	  event: "Programa",
+				      	  defaultRowText: "Conference room",
+				      	  save: "Guardar",
+				      	  today: "Hoy",
+				      	  editor: {
+				      		 	
+				      	        description: "Descripcion",
+				      	        editorTitle: "Editar Programa",
+				      	      	start: "Fecha de Inicio",
+				      	        end: "Fecha de FIn",				      	        
+				      	        title: "Titulo"
+				      	  
+				      	        
+				      	  },
+				      	  views: {
+				      	        day: "Dia",
+				      	        month: "Mes",
+				      	        week: "Semanal",
+				      	        agenda: "Agenda",
+				      	        workWeek:"Dias Laborales"
+				      	  }
+				        },
+				      
+				        editable: {
+				                  confirmation: "¿Está seguro que va ha eliminar este Programa?",
+				                  
+				        },
+				        edit: function(e) {
+				            e.container.find("[name=isAllDay]").parent().prev().remove().end().remove();
+				            e.container.find("[name=recurrenceRule]").parent().prev().remove().end().remove();
+					  },
+				      
+				        dataSource: {
+				            batch: true,
+				            transport: {
+				                read: {
+				                    url: "@{calendarios.leerCalendario}",
+				                    dataType: "json"
+				                    
+				                },
+				                update: {
+				                    url: "@{calendarios.actualizar}",
+				                    dataType: "json",				                    
+				                    complete: function (data) {
+				                        alert("Actualizacion exitosa. ");
+				                        window.location.replace("@{calendarios.calendar}");
+				                    }
+				                },
+				                create: {
+				                    url: "@{calendarios.guardar}",
+				                    dataType: "json",				                    
+					                complete: function (data) {
+					                        alert("Registro guardado exitosamente. ");
+					                        window.location.replace("@{calendarios.calendar}");
+					                    }
+				                },
+				                destroy: {
+				                    url: "@{calendarios.eliminar}",
+				                    dataType: "json",				                    
+					                complete: function (data) {
+					                        alert("Eliminación exitosa. ");
+					                        window.location.replace("@{calendarios.calendar}");
+					                }
+				                },
+				                parameterMap: function(options, operation) {
+				                    if (operation !== "read" && options.models) {
+				                        return {models: kendo.stringify(options.models)};
+				                    }
+				                }
+				            },
+				            schema: {
+				                model: {
+				                    id: "meetingID",
+				                    fields: {
+				                        meetingID: { from: "id", type: "number" },
+				                        title: { from: "titulo", defaultValue: "No title", validation: { required: true } },
+				                        start: { type: "date", from: "inicio" , validation: { required: true }},
+				                        end: { type: "date", from: "fin", validation: { required: true } },
+				                        description: { from: "descripcion", validation: { required: true } },
+				                       
+				
+				                     }
+				                }
+				            }
+				        }
+				    });
+				    
+				    
+				</script>
+				
+				#{/if}
+				
+				#{else}
+				
+					<script>
+					kendo.culture("es-ES");
+			
+				    $("#scheduler").kendoScheduler({
+				          
+				        date: new Date("2016/02/04"),
+				        startTime: new Date("2016/02/04 07:00 AM"),
+				        height: 600,
+				        views: [
+				            "day",
+				            "week",
+				            { type: "workWeek", selected: true },
+				            "month",
+				            "agenda",
+				            "timeline"
+				        ],
+				        
+				        
+				        messages: {
+				      	  cancel: "Cancelar",
+				      	  date: "Fecha",
+				      	  deleteWindowTitle: "Eliminar Programa",
+				      	  destroy: "Eliminar",
+				      	  event: "Programa",
+				      	  defaultRowText: "Conference room",
+				      	  save: "Guardar",
+				      	  today: "Hoy",
+				      	  editor: {
+				      			
+				      	        description: "Descripcion",
+				      	        editorTitle: "Editar Programa",
+				      	        end: "Fecha de Inicio",
+				      	        start: "Fecha de Fin",
+				      	        title: "Titulo"
+				      	     	
+				      	  },
+				      	  views: {
+				      	        day: "Dia",
+				      	        month: "Mes",
+				      	        week: "Semanal",
+				      	        agenda: "Agenda",
+				      	        workWeek:"Dias Laborables"
+				      	  }
+				        },
+				      
+				        editable: {
+				                  confirmation: "Esta seguro que va ha eliminar este Programa?",
+				                  
+				        },
+				        edit: function(e) {
+				            e.container.find("[name=isAllDay]").parent().prev().remove().end().remove();
+				            e.container.find("[name=recurrenceRule]").parent().prev().remove().end().remove();
+				  },
+				      
+				        dataSource: {
+				            batch: true,
+				            transport: {
+				                read: {
+				                    url: "@{calendarios.leerCalendario}",
+				                    dataType: "json"
+				                },
+				                update: {
+				                    url: "@{calendarios.actualizar2}",
+				                    dataType: "json",				                    
+				                    complete: function (data) {
+				                        alert("Lo sentimos, no tiene permiso para realizar la operacion. Por favor inicie sesion. ");
+				                        window.location.replace("@{Secure.login}");
+				                    }
+				                },
+				                create: {
+				                    url: "@{calendarios.guardar2}",
+				                    dataType: "json",				                    
+				                    complete: function (data) {
+				                        alert("Lo sentimos, no tiene permiso para realizar la operacion. Por favor inicie sesion. ");
+				                        window.location.replace("@{Secure.login}");
+				                    }
+				                },
+				                destroy: {
+				                    url: "@{calendarios.eliminar2}",
+				                    dataType: "json",				                    
+				                    complete: function (data) {
+				                        alert("Lo sentimos, no tiene permiso para realizar la operacion. Por favor inicie sesion. ");
+				                        window.location.replace("@{Secure.login}");
+				                    }
+				                },
+				                parameterMap: function(options, operation) {
+				                    if (operation !== "read" && options.models) {
+				                        return {models: kendo.stringify(options.models)};
+				                    }
+				                }
+				            },
+				            editable:false,
+				            schema: {
+				                model: {
+				                    id: "meetingID",
+				                    fields: {
+				                        meetingID: { from: "id", type: "number" },
+				                        title: { from: "titulo", defaultValue: "No title", validation: { required: true } },
+				                        start: { type: "date", from: "inicio" , validation: { required: true }},
+				                        end: { type: "date", from: "fin", validation: { required: true } },
+				                        description: { from: "descripcion", validation: { required: true } },
+				                        
+				
+				                     }
+				                }
+				            }
+				        }
+				    });
+				    
+					</script>
+				
+				#{/else}
+
+        </div>
+        <div class="tab-pane" id="orange">
+        
+     		        	<b>Una mesa permanente de trabajo deja el Primer Encuentro de Productores Audiovisuales y Cineastas de los Pueblos y Nacionalidades - CNCINE</b>
+					<center><p>
+						<img src="/public/documentationImages/FrontierCalendar10.jpg"
+							style="border: 0px solid; width: 800px;">
+					</p>
+					<b>INTERCULTURAL</b>
+					<p>
+						<img src="/public/documentationImages/FrontierCalendar03.jpg"
+							style="border: 0px solid; width: 800px;">
+					</p>
+					<b>Presentador de Noticias.</b>
+					<p>
+						<img src="/public/documentationImages/noticias.jpg"
+							style="border: 0px solid; width: 800px;">				
+					</p>
+          			</center>
+	
+        </div>
+       
+    </div>
+</div>
+
+
+
+
+
+</div>
+
+				<style type="text/css">
+a {
+	font: 11px/14px georgia, times, verdana, arial, helvetica, sans-serif;
+	text-decoration: none;
+}
+
+a:hover {
+	background-color: #ccc;
+}
+
+a:link {
+	color: royalblue;
+}
+
+a:visited {
+	color: royalblue;
+}
+
+.code, .info, .codeHead, .apiHead, .api {
+	background-color: #dddddd;
+	color: #000000;
+	font: 11px/14px verdana, georgia, times, arial, helvetica, sans-serif;
+	line-height: 18px;
+	padding: 3px;
+	margin: 0px;
+}
+
+.codeHead {
+	background-color: #bbbbbb;
+}
+
+.info {
+	background-color: #ffffff;
+	color: #444444;
+}
+
+.apiHead {
+	background-color: #dedede;
+	color: #000000;
+}
+
+.api {
+	background-color: #ffffff;
+	color: #333333;
+}
+
+textarea.code {
+	width: 100%;
+	height: 300px;
+	padding: 0px;
+	margin: 0px;
+	font-size: 1.2em;
+	font-family: monospace;
+	background-color: #efefef;
+	color: #222222;
+}
+
+table.apiTable {
+	border-width: 0px 0px 0px 0px;
+	border-spacing: 2px;
+	border-style: outset outset outset outset;
+	border-color: gray gray gray gray;
+	border-collapse: collapse;
+	background-color: #ffffff;
+	width: 100%;
+}
+
+table.apiTable th {
+	font: 12px/12px verdana, georgia, times, arial, helvetica, sans-serif;
+	font-weight: bold;
+	text-align: left;
+	color: #555555;
+	border-width: 1px 1px 1px 1px;
+	padding: 3px 3px 3px 3px;
+	border-style: inset inset inset inset;
+	border-color: rgb(200, 200, 200);
+	background-color: #ffffff;
+	-moz-border-radius: 0px 0px 0px 0px;
+}
+
+table.apiTable td {
+	font: 12px/12px verdana, georgia, times, arial, helvetica, sans-serif;
+	color: #555555;
+	border-width: 1px 1px 1px 1px;
+	padding: 3px 3px 3px 3px;
+	border-style: inset inset inset inset;
+	border-color: rgb(200, 200, 200);
+	background-color: #ffffff;
+	-moz-border-radius: 0px 0px 0px 0px;
+}
+</style>
+
+
+				<!-- Add event modal form -->
+<style type="text/css">
+.nav-tabs{
+  background-color:#626262;
+}
+.tab-content{
+    background-color:#A9A9A9;
+    color:black;
+    padding:5px;
+    font-size:12px;
+}
+.nav-tabs > li > a{
+  border: medium none;
+  color: white;
+}
+.nav-tabs > li > a:hover{
+  background-color: #303136 !important;
+    border: medium none;
+    border-radius: 0;
+    color:#fff;
+}
+.nav-tabs > li.active > a,
+.nav-tabs > li.active > a:focus,
+.nav-tabs > li.active > a:hover{
+    background-color: #303136 !important;
+    color: white;
+}
+</style>
+
+
+
+
